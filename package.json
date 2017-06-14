@@ -1,0 +1,13 @@
+{
+  "name": "quick-decide",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "glob": "^7.1.2",
+    "yargs": "^8.0.2"
+  }
+}

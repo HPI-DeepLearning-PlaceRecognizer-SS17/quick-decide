@@ -1,0 +1,21 @@
+{
+  "name": "quick-decide",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Torben Meyer <torben.meyer@mailbox.org>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
