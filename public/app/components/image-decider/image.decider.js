@@ -81,25 +81,30 @@ angular.module('quickDecide')
         loadImages(displayCurrent);
     }
 
-    function updateState(state){
+    function updateState(state, callback){
         if($scope.hasImages) {
             $scope.currentImage.info.annotationStatus = state;
-            ImageService.updateState($scope.currentImage.infoLink, $scope.currentImage.info);
+            ImageService.updateState($scope.currentImage.infoLink, $scope.currentImage.info).then(callback);
         }
     }
 
+    $scope.isGood = function(){
+        if($scope.currentImage && $scope.currentImage.info && $scope.currentImage.info.boundingBox &&
+            $scope.currentImage.info.annotationStatus !== 'manuallyAnnotated') {
+            updateState('autoAnnotated-Good', $scope.nextImage);
+        }
+    };
+
     $scope.manualAnnotationNeeded = function(){
         if($scope.currentImage && $scope.currentImage.info &&
-            ($scope.currentImage.annotationStatus === 'autoAnnotated' ||
-            $scope.currentImage.annotationStatus === 'autoAnnotated-Good')){
-            updateState('autoAnnotated-NeedsImprovement');
+            ($scope.currentImage.info.annotationStatus === 'autoAnnotated' ||
+            $scope.currentImage.info.annotationStatus === 'autoAnnotated-Good')){
+            updateState('autoAnnotated-NeedsImprovement', $scope.nextImage);
         }
     };
 
     $scope.discard = function() {
-        updateState('ignore');
-        $scope.currentImage.state = 'ignore';
-        ImageService.updateState($scope.currentImage.self, $scope.currentImage);
+        updateState('ignore', $scope.nextImage);
     };
 
     $scope.prevImage = function() {
@@ -115,7 +120,7 @@ angular.module('quickDecide')
         } else {
             $scope.currentIndex = $scope.loadedImages.length - 1;
         }
-        displayCurrent();
+        $timeout(displayCurrent);
     };
 
     $scope.$on('events.label.updated', reset);
@@ -124,6 +129,7 @@ angular.module('quickDecide')
     keyActionMapping = {
         'x': $scope.discard,
         'm': $scope.manualAnnotationNeeded,
+        'g': $scope.isGood,
         'ArrowRight': $scope.nextImage,
         'ArrowLeft': $scope.prevImage
     };

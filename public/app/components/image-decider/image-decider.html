@@ -4,7 +4,8 @@
             <button ng-click="prevImage()" class="btn btn-lg btn-default">< Prev</button>
             <button ng-click="nextImage()" class="btn btn-lg btn-default">Next ></button>
             <button class="btn btn-lg btn-danger" ng-click="discard()">Discard (X)</button>
-            <button class="btn btn-lg btn-info" ng-click="manualAnnotationNeeded()">Needs Improvement (M)</button>
+            <button class="btn btn-lg btn-warning" ng-click="manualAnnotationNeeded()">Needs Improvement (M)</button>
+            <button class="btn btn-lg btn-success" ng-click="isGood()">Good (G)</button>
             <p class="imageInfo">
                 <b>{{currentIndex+1}}</b> of <b>{{loadedImages.length}}</b>
             </p>
