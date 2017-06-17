@@ -1,0 +1,11 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Visible States <button class="btn btn-xs btn-primary" ng-click="reloadImageCount()">Update Image Count</button>
+    </div>
+    <div class="panel-body">
+        <div ng-repeat="(state, activated) in possibleStates track by $index">
+            <input type="checkbox" ng-model="possibleStates[state]" ng-change="stateChanged()">
+            <state-label state="state"></state-label> ({{stateImageCount[state]}})
+        </div>
+    </div>
+</div>

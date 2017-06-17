@@ -1,44 +1,31 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <style>
-            .labels {
-                margin: 10px 0;
-            }
-            .image-container {
-                position: relative;
-            }
-            .image-box {
-                position: absolute;
-                border: 6px solid turquoise;
-                top: 113px;
-                left: 76px;
-                width: 266px;
-                height: 218px;
-                box-sizing: border-box;
-            }
-        </style>
-   
-   </head>
-    <body>
-        <div class="container">
-            <h1>Easy Deciding</h1>
+<html ng-app="quickDecide">
+<head>
+    <title>Quick Annotation Decider</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Pacifico" rel="stylesheet">
+    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
 
-            <button onclick="prevImage()" class="btn btn-lg btn-default">< Prev</button> <button  onclick="nextImage()" class="btn btn-lg btn-default">Next ></button> 
-            <button class="btn btn-lg btn-danger" onclick="discard()">Discard</button>
-            <div class="labels">
-                <span id="current"></span> of <span id="total"></span><br>
-                Detected Label: <span id="label"></span> <br>
-                Score: <span id="score"></span>
-            </div>
-            <div class="image-container">
-            <img src="" id="image">
-            <div class="image-box" id="image-box"></div>
-            </div>
-        </div>
-        <script src="components/jquery/dist/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>   
-        <script src="script.js"></script>
-    </body>
+<nav-bar></nav-bar>
+<div ng-view></div>
+
+<!-- Libraries -->
+<script src="components/jquery/dist/jquery.min.js"></script>
+<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="components/angular/angular.min.js"></script>
+<script src="components/angular-route/angular-route.min.js"></script>
+
+<!-- Our Components -->
+<script src="app/app.js"></script>
+<script src="app/directives/navigation/navigation.js"></script>
+<script src="app/components/image-decider/image.decider.js"></script>
+<script src="app/services/imageService.js"></script>
+<script src="app/services/labelService.js"></script>
+<script src="app/directives/state-label/state.label.js"></script>
+<script src="app/directives/bb-image/bbImage.js"></script>
+<script src="app/directives/image-info/image.info.js"></script>
+<script src="app/directives/active-states/active.states.js"></script>
+
+</body>
 </html>

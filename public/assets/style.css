@@ -1,0 +1,25 @@
+* {
+  font-family: 'Open Sans', sans-serif; }
+  * b {
+    font-weight: 700; }
+
+.navbar.navbar-inverse {
+  background-color: #000000; }
+  .navbar.navbar-inverse .navbar-brand {
+    font-family: 'Pacifico', 'Open Sans', sans-serif;
+    color: #ffffff !important;
+    margin-right: 20px; }
+    .navbar.navbar-inverse .navbar-brand:hover {
+      color: #449d44 !important; }
+  .navbar.navbar-inverse ul.nav li.active a, .navbar.navbar-inverse ul.nav li:hover a {
+    background-color: #449d44; }
+
+.image-container {
+  position: relative; }
+
+.image-box {
+  position: absolute;
+  border: 6px solid turquoise;
+  box-sizing: border-box; }
+
+/*# sourceMappingURL=style.css.map */

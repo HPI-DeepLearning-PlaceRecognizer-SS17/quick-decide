@@ -1,9 +1,11 @@
-const argv = require('yargs').argv
+'use strict';
+
+const argv = require('yargs').argv;
 const fs = require('fs');
-var express = require('express')
+
 var path = require('path');
 var glob = require('glob');
-var app = express();
+
 
 function die(msg){
     console.error(msg);
@@ -16,7 +18,8 @@ const config = {
     dir: argv.dir || die('You need to specifiy an input directory (--dir)'),
     trashDir: argv.trashDir || die('You need specify a directory for discarded images (--trashDir)'),
     keepBB: argv.keepBB || true
-}
+};
+
 config.annotationsDir = argv.annoDir || config.dir;
 
 function pathToFilename(file){
@@ -31,9 +34,7 @@ function getImages(glob_str){
     });
 }
 
-function filenameWithoutExt(file){
-    return path.basename(file, path.extname(file));
-}
+
 
 function getJsonFile(file) {
     return path.join(__dirname, config.annotationsDir, filenameWithoutExt(file)+'.json')
@@ -47,7 +48,7 @@ function getTrashPath(file) {
     return path.join(__dirname, config.trashDir, file);
 }
 
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Getting the images & the bounding box
 
@@ -69,10 +70,28 @@ app.post('/discard/:file', function(req,res,next){
 
 app.get('/images', function(req, res, next){
     getImages(path.join(config.dir, config.glob)).then(function(images){
-        res.send(images);
+        res.send(images.map(function(image){
+            return {
+                "selfLink": "images/"+image,
+                "infoLink": "info/"+image,
+                "state": "autoAnnotated"
+            }
+        }));
         next();
     });
 });
+
+app.get('/imagecount/:label', function(req, res){
+    res.send({
+        'autoAnnotated': 1000,
+        'autoAnnotated-Good': 10,
+        'autoAnnotated-NeedsImprovement': 20,
+        'ignore': 30,
+        'manuallyAnnotated': 40,
+        'none': 50
+    });
+});
+
 
 
 
@@ -80,11 +99,9 @@ app.get('/images/:file', function(req, res){
     res.sendFile(getImagePath(req.params.file));
 });
 
-app.get('/box/:file', function(req, res){
+app.get('/info/:file', function(req, res){
     res.sendFile(getJsonFile(req.params.file));
 })
 
 fs.mkdir(path.join(__dirname, config.trashDir), console.log);
 
-app.listen(config.port);
-console.log('Listening on port', config.port);

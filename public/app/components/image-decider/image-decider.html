@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <button ng-click="prevImage()" class="btn btn-lg btn-default">< Prev</button>
+            <button ng-click="nextImage()" class="btn btn-lg btn-default">Next ></button>
+            <button class="btn btn-lg btn-danger" ng-click="discard()">Discard (X)</button>
+            <button class="btn btn-lg btn-info" ng-click="manualAnnotationNeeded()">Needs Improvement (M)</button>
+            <p class="imageInfo">
+                <b>{{currentIndex+1}}</b> of <b>{{loadedImages.length}}</b>
+            </p>
+            <bb-image image="currentImage"></bb-image>
+        </div>
+        <div class="col-md-4">
+            <image-info image="currentImage"></image-info>
+            <active-states></active-states>
+        </div>
+    </div>
+
+
+</div>

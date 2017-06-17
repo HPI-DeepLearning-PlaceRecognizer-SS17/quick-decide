@@ -3,3 +3,4 @@ node_modules/
 quickstart.sh
 public/components/
 *.log
+.idea/
