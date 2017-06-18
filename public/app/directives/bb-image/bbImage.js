@@ -11,10 +11,10 @@ angular.module('quickDecide')
                 function updateBoundingBox(){
                     if($scope.image && $scope.image.annotation && $scope.image.annotation.boundingBox){
                         $scope.boundingBox = {
-                            'top': $scope.image.annotation.boundingBox.y+'px',
-                            'left': $scope.image.annotation.boundingBox.x+'px',
-                            'width': $scope.image.annotation.boundingBox.width + 'px',
-                            'height': $scope.image.annotation.boundingBox.height + 'px',
+                            'top': $scope.image.annotation.boundingBox.y*100+'%',
+                            'left': $scope.image.annotation.boundingBox.x*100+'%',
+                            'width': $scope.image.annotation.boundingBox.width*100 + '%',
+                            'height': $scope.image.annotation.boundingBox.height*100 + '%',
                             'display': 'block'
                         };
                     } else {

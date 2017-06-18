@@ -15,7 +15,8 @@
     background-color: #449d44; }
 
 .image-container {
-  position: relative; }
+  position: relative;
+  display: inline-block; }
 
 .image-box {
   position: absolute;
