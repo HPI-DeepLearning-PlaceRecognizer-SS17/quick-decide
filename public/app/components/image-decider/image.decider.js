@@ -87,19 +87,34 @@ angular.module('quickDecide')
         }
     }
 
-    $scope.isGood = function(){
-        if($scope.currentImage && $scope.currentImage.annotation && $scope.currentImage.annotation.boundingBox &&
-            $scope.currentImage.annotation.annotationStatus !== 'manuallyAnnotated') {
-            updateState('autoAnnotated-Good', $scope.nextImage);
+    function performLegalUpdate(legalStates, illegalStates, needsBoundingBox, newStatus){
+        if($scope.currentImage && $scope.currentImage.annotation){
+            var oldState = $scope.currentImage.annotation.annotationStatus;
+            console.log(oldState, $scope.currentImage.annotation.boundingBox);
+            if(legalStates.length === 0 || legalStates.indexOf(oldState) >= 0){
+                console.log("yes");
+                if(illegalStates.length === 0 || illegalStates.indexOf(oldState) === -1){
+                    console.log("yes2");
+                    if(!needsBoundingBox || $scope.currentImage.annotation.boundingBox){
+                        updateState(newStatus, $scope.nextImage);
+                    }
+                }
+            }
+
         }
+    }
+
+    $scope.isGood = function(){
+        performLegalUpdate([],
+            ['manuallyAnnotated'],
+            true,
+            'autoAnnotated-Good'
+        );
     };
 
     $scope.manualAnnotationNeeded = function(){
-        if($scope.currentImage && $scope.currentImage.annotation &&
-            ($scope.currentImage.annotation.annotationStatus === 'autoAnnotated' ||
-            $scope.currentImage.annotation.annotationStatus === 'autoAnnotated-Good')){
-            updateState('autoAnnotated-NeedsImprovement', $scope.nextImage);
-        }
+        performLegalUpdate(['autoAnnotated', 'autoAnnotated-Good', 'none', 'ignore'],
+            [], false, 'autoAnnotated-NeedsImprovement');
     };
 
     $scope.discard = function() {
