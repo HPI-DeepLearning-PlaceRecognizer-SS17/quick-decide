@@ -23,6 +23,10 @@ angular.module('quickDecide')
                     }
                 };
 
+                $scope.reload = function(){
+                    $timeout($scope.updateLabel);
+                };
+
                 $scope.recreateIndex = function(){
                     if(window.confirm('Are you sure that you want to perfom this action?')){
                         $http.get('/index/recreate').then(
