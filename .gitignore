@@ -4,3 +4,5 @@ quickstart.sh
 public/components/
 *.log
 .idea/
+/localStartServer.sh
+/runDockerLocal.sh

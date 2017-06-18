@@ -19,8 +19,8 @@ function getAbsolutePath(relPath) {
 }
 
 const config = {
-    port: argv.port || 3000,
-    dir: getAbsolutePath(argv.dir || die('You need to specifiy an input directory (--dir)')),
+    port: argv.port || 3010,
+    dir: getAbsolutePath(argv.dir || '/images'),
     publicDir: getAbsolutePath(argv.publicDir || '../public'),
     reloadIndex: argv.reloadIndex !== null && argv.reloadIndex !== undefined
 };

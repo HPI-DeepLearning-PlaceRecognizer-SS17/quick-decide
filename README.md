@@ -15,7 +15,7 @@ Possible Parameters for `node server/index.js`:
 ```
 --dir               Directory of the images. REQUIRED.
 --recreateIndex     Recreates the index on startup, if set
---port              Port of the server to run on. Default: 3000
+--port              Port of the server to run on. Default: 3010
 ```
 
-After starting, go to localhost:port (e.g. http//localhost:3000).
+After starting, go to localhost:port (e.g. http//localhost:3010).
