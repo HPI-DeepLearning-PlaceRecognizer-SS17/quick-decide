@@ -9,12 +9,12 @@ angular.module('quickDecide')
             templateUrl: 'app/directives/bb-image/bb-image.html',
             link: function ($scope) {
                 function updateBoundingBox(){
-                    if($scope.image && $scope.image.info && $scope.image.info.boundingBox){
+                    if($scope.image && $scope.image.annotation && $scope.image.annotation.boundingBox){
                         $scope.boundingBox = {
-                            'top': $scope.image.info.boundingBox.y+'px',
-                            'left': $scope.image.info.boundingBox.x+'px',
-                            'width': $scope.image.info.boundingBox.width + 'px',
-                            'height': $scope.image.info.boundingBox.height + 'px',
+                            'top': $scope.image.annotation.boundingBox.y+'px',
+                            'left': $scope.image.annotation.boundingBox.x+'px',
+                            'width': $scope.image.annotation.boundingBox.width + 'px',
+                            'height': $scope.image.annotation.boundingBox.height + 'px',
                             'display': 'block'
                         };
                     } else {

@@ -3,7 +3,7 @@
 const argv = require('yargs').argv;
 const path = require('path');
 const server = require('./server.js');
-const filemanager = require('./filemanager');
+const indexController = require('./indexcontroller.js');
 
 
 function die(msg) {
@@ -20,15 +20,14 @@ function getAbsolutePath(relPath) {
 
 const config = {
     port: argv.port || 3000,
-    // glob: argv.glob || '*.jpg',
     dir: getAbsolutePath(argv.dir || die('You need to specifiy an input directory (--dir)')),
     publicDir: getAbsolutePath(argv.publicDir || '../public'),
-    reloadOverview: argv.reloadOverview !== null && argv.reloadOverview !== undefined
+    reloadIndex: argv.reloadIndex !== null && argv.reloadIndex !== undefined
 };
 
 if (config.reloadOverview) {
-    console.log('Reloading Overview files...');
-    filemanager.createOverviewFile(config.dir);
+    console.log('Recreating Index files...');
+    indexController.createIndex(config.dir);
 }
 
 

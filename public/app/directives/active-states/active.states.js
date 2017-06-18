@@ -45,7 +45,7 @@ angular.module('quickDecide')
                 $scope.stateImageCount = angular.copy(defaultImageCount);
 
                 $scope.reloadImageCount = function(){
-                    $http.get('/states/'+LabelService.getCurrentLabel()).then(
+                    $http.get('/annotation-status/'+LabelService.getCurrentLabel()).then(
                         function(response){
                             if(response && response.data){
                                 $scope.stateImageCount = angular.extend(angular.copy(defaultImageCount), response.data);

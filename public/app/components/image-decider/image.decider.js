@@ -8,7 +8,6 @@ angular.module('quickDecide')
     $scope.loadedImages = [];
     $scope.currentIndex = 0;
     $scope.currentImage = {};
-    $scope.currentImageInfo = {};
     $scope.hasImages = false;
 
     function loadImages(callback) {
@@ -19,7 +18,7 @@ angular.module('quickDecide')
                 if(!response.data || Object.keys(response.data).length === 0){
                     $scope.loadedImages = [{
                         'selfLink': '/assets/blank.png',
-                        'info': {
+                        'annotation': {
                             'id': 'There were no images found!',
                             'label': 'UNDEFINED',
                             'score': 'NONE'
@@ -43,7 +42,7 @@ angular.module('quickDecide')
     function loadImageInfo(image, callback){
         ImageService.getImageInfo(image).then(
             function (response){
-                image.info = response.data;
+                image.annotation = response.data;
                 $scope.currentImage = image;
                 callback();
             }
@@ -58,7 +57,7 @@ angular.module('quickDecide')
             $scope.currentImage = nextImage;
         };
 
-        if(!nextImage.info){
+        if(!nextImage.annotation){
             loadImageInfo(nextImage, setImage);
         } else {
             setImage();
@@ -83,22 +82,22 @@ angular.module('quickDecide')
 
     function updateState(state, callback){
         if($scope.hasImages) {
-            $scope.currentImage.info.annotationStatus = state;
-            ImageService.updateState($scope.currentImage.infoLink, $scope.currentImage.info).then(callback);
+            $scope.currentImage.annotation.annotationStatus = state;
+            ImageService.updateState($scope.currentImage.annotationLink, $scope.currentImage.annotation).then(callback);
         }
     }
 
     $scope.isGood = function(){
-        if($scope.currentImage && $scope.currentImage.info && $scope.currentImage.info.boundingBox &&
-            $scope.currentImage.info.annotationStatus !== 'manuallyAnnotated') {
+        if($scope.currentImage && $scope.currentImage.annotation && $scope.currentImage.annotation.boundingBox &&
+            $scope.currentImage.annotation.annotationStatus !== 'manuallyAnnotated') {
             updateState('autoAnnotated-Good', $scope.nextImage);
         }
     };
 
     $scope.manualAnnotationNeeded = function(){
-        if($scope.currentImage && $scope.currentImage.info &&
-            ($scope.currentImage.info.annotationStatus === 'autoAnnotated' ||
-            $scope.currentImage.info.annotationStatus === 'autoAnnotated-Good')){
+        if($scope.currentImage && $scope.currentImage.annotation &&
+            ($scope.currentImage.annotation.annotationStatus === 'autoAnnotated' ||
+            $scope.currentImage.annotation.annotationStatus === 'autoAnnotated-Good')){
             updateState('autoAnnotated-NeedsImprovement', $scope.nextImage);
         }
     };

@@ -15,7 +15,7 @@ angular.module('quickDecide')
 
                 $scope.autoAnnotateAsGood = function(){
                     if(window.confirm('Are you sure that you want to perfom this action?')){
-                        $http.post('/info/'+$scope.currentLabel+'/transformAll?from=autoAnnotated&to=autoAnnotated-Good').then(
+                        $http.post('/annotations/'+$scope.currentLabel+'/transformAll?from=autoAnnotated&to=autoAnnotated-Good').then(
                             function(){
                                 $timeout($scope.updateLabel);
                             }
@@ -25,7 +25,7 @@ angular.module('quickDecide')
 
                 $scope.recreateIndex = function(){
                     if(window.confirm('Are you sure that you want to perfom this action?')){
-                        $http.get('/states/reload').then(
+                        $http.get('/index/recreate').then(
                             function(){
                                 $timeout($scope.updateLabel);
                             }

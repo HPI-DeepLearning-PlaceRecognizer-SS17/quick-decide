@@ -7,7 +7,7 @@ angular.module('quickDecide')
             return $http.get(
                 LabelService.getCurrentLabel(),
                 {params: {
-                    'states': LabelService.getVisibleStates()
+                    'annotationStates': LabelService.getVisibleStates()
                 }}
             );
         },
@@ -15,7 +15,7 @@ angular.module('quickDecide')
             return $http.patch(url, data);
         },
         getImageInfo: function(image){
-            return $http.get(image.infoLink);
+            return $http.get(image.annotationLink);
         }
     };
 
