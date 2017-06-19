@@ -20,7 +20,7 @@
                 <div class="form-group">
 
                     <select class="form-control" ng-model="currentLabel" ng-change="updateLabel()">
-                        <option ng-repeat="label in availableLabels">{{label}}</option>
+                        <option ng-repeat="(label, count) in availableLabels" value="{{label}}">{{label}} ({{count}})</option>
                     </select>
 
                     <button class="btn btn-info" style="margin-left:30px;" ng-click="reload()">Reload</button>

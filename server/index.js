@@ -22,10 +22,10 @@ const config = {
     port: argv.port || 3010,
     dir: getAbsolutePath(argv.dir || '/images'),
     publicDir: getAbsolutePath(argv.publicDir || '../public'),
-    reloadIndex: argv.reloadIndex !== null && argv.reloadIndex !== undefined
+    recreateIndex: argv.recreateIndex !== null && argv.recreateIndex !== undefined
 };
 
-if (config.reloadOverview) {
+if (config.recreateIndex) {
     console.log('Recreating Index files...');
     indexController.createIndex(config.dir);
 }

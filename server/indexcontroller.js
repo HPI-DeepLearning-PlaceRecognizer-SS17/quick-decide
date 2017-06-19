@@ -49,10 +49,23 @@ function createIndexEntry(imageId, label, annotationStatus){
     };
 }
 
+
+function getGoodImageCount(baseDir, label){
+    let statusCount = getAnnotationStatusCount(baseDir, label);
+    return (statusCount['autoAnnotated-Good'] || 0) + (statusCount['manuallyAnnotated'] || 0);
+}
+
 function getLabels(baseDir){
-    let overviewGlob = path.join(baseDir, `*.${naming.INDEX_FILEEXT}`);
-    let overviewFiles = glob.sync(overviewGlob);
-    return overviewFiles.map(filemanager.filenameWithoutExt);
+    let indexGlob = path.join(baseDir, `*.${naming.INDEX_FILEEXT}`);
+    let indexFiles = glob.sync(indexGlob);
+    return indexFiles
+        .map(filemanager.filenameWithoutExt)
+        .reduce(function(result, item){
+            console.log(item);
+          result[item] = getGoodImageCount(baseDir, item);
+          return result;
+        },{});
+
 }
 
 
